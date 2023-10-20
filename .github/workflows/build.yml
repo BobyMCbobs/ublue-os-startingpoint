@@ -25,6 +25,7 @@ env:
 # having "development" branches without interfering with GHCR image uploads.
 jobs:
   push-ghcr:
+    timeout-minutes: 30
     name: Build and push image
     runs-on: ubuntu-22.04
     permissions:
