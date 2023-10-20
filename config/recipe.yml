@@ -1,5 +1,5 @@
 # image will be published to ghcr.io/<user>/<name>
-name: startingpoint
+name: bobymcbobs-ublue-os-startingpoint
 # description will be included in the image's metadata
 description: A starting point for further customization of uBlue images. Make your own! https://ublue.it/making-your-own/
 
@@ -24,7 +24,8 @@ modules:
     repos:
       # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
     install:
-      # - micro
+      - vim
+      # micro
       # - starship
     remove:
       - firefox # default firefox removed in favor of flatpak
@@ -44,6 +45,8 @@ modules:
   - type: yafti # if included, yafti and it's dependencies (pip & libadwaita)
                 #  will be installed and set up
     custom-flatpaks: # this section is optional
+      - org.mozilla.firefox
+      - com.slack.Slack
       # - Celluloid: io.github.celluloid_player.Celluloid
       # - Krita: org.kde.krita
 
