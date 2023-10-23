@@ -17,11 +17,17 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v4
+      - name: Maximize build space
+        uses: AdityaGarg8/remove-unwanted-software@v1
+        with:
+          remove-dotnet: 'true'
+          remove-android: 'true'
+          remove-haskell: 'true'
       - name: Generate ISO  
         uses: ublue-os/lorax-compose@main
         id: build
         with:
-          ostree-oci-ref: ghcr.io/bobymcbobs/${{ github.event.repository.name }}:38
+          ostree-oci-ref: ghcr.io/bobymcbobs/bobymcbobs-ublue-os-startingpoint:38
           fedora-release: 38
       - name: install github CLI
         run: |
