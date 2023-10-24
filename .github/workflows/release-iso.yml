@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: install dependencies
         run: |
-          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && \
+          curl -sSL -o /usr/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 && \
           chmod +x /usr/bin/yq
       - name: Gather image data from recipe
         run: |
