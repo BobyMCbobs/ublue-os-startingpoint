@@ -19,14 +19,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: install dependencies
         run: |
-          dnf install -y docker
+          wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/bin/yq && \
+          chmod +x /usr/bin/yq
       - name: Gather image data from recipe
-        env:
-          # hacky workaround for now
-          YQ: docker run --rm -v "${PWD}":/workdir mikefarah/yq
         run: |
-          echo "IMAGE_NAME=$(eval $YQ '.name' ./config/recipe.yml)" >> $GITHUB_ENV
-          echo "IMAGE_MAJOR_VERSION=$(eval $YQ '.image-version' ./config/recipe.yml)" >> $GITHUB_ENV
+          echo "IMAGE_NAME=$(yq '.name' ./config/recipe.yml)" >> $GITHUB_ENV
+          echo "IMAGE_MAJOR_VERSION=$(yq '.image-version' ./config/recipe.yml)" >> $GITHUB_ENV
       - name: Generate ISO
         uses: ublue-os/isogenerator@main
         id: isogenerator
