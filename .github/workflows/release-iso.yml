@@ -24,11 +24,13 @@ jobs:
           remove-android: 'true'
           remove-haskell: 'true'
       - name: Generate ISO  
-        uses: ublue-os/lorax-compose@main
-        id: build
+        uses: ublue-os/isogenerator@main
+        id: isogenerator
         with:
-          ostree-oci-ref: ghcr.io/bobymcbobs/bobymcbobs-ublue-os-startingpoint:38
-          fedora-release: 38
+          image-name: ${{ github.event.repository.name }}
+          installer-repo: releases
+          installer-major-version: 38
+          boot-menu-path: boot_menu.yml
       - name: install github CLI
         run: |
           sudo dnf install 'dnf-command(config-manager)' -y
@@ -39,12 +41,12 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           if gh release list -R ${{ github.repository_owner }}/${{ github.event.repository.name }} | grep "auto-iso"; then
-            gh release upload auto-iso ${{ steps.build.outputs.iso-path }} -R ${{ github.repository_owner }}/${{ github.event.repository.name }} --clobber
+            gh release upload auto-iso ${{ steps.isogenerator.outputs.iso-path }} -R ${{ github.repository_owner }}/${{ github.event.repository.name }} --clobber
           else
-            gh release create auto-iso ${{ steps.build.outputs.iso-path }} -t ISO -n "This is an automatically generated ISO release." -R ${{ github.repository_owner }}/${{ github.event.repository.name }}
+            gh release create auto-iso ${{ steps.isogenerator.outputs.iso-path }} -t ISO -n "This is an automatically generated ISO release." -R ${{ github.repository_owner }}/${{ github.event.repository.name }}
           fi
       - name: Upload SHA256SUM
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run:
-          gh release upload auto-iso ${{ steps.build.outputs.sha256sum-path }} -R ${{ github.repository_owner }}/${{ github.event.repository.name }} --clobber
+          gh release upload auto-iso ${{ steps.isogenerator.outputs.sha256sum-path }} -R ${{ github.repository_owner }}/${{ github.event.repository.name }} --clobber
