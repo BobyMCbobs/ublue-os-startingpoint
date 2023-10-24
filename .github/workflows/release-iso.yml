@@ -23,13 +23,17 @@ jobs:
           remove-dotnet: 'true'
           remove-android: 'true'
           remove-haskell: 'true'
-      - name: Generate ISO  
+      - name: Gather image data from recipe
+        run: |
+          echo "IMAGE_NAME=$(yq '.name' ./config/recipe.yml)" >> $GITHUB_ENV
+          echo "IMAGE_MAJOR_VERSION=$(yq '.image-version' ./config/recipe.yml)" >> $GITHUB_ENV
+      - name: Generate ISO
         uses: ublue-os/isogenerator@main
         id: isogenerator
         with:
-          image-name: ${{ github.event.repository.name }}
+          image-name: ${{ env.IMAGE_NAME }}
           installer-repo: releases
-          installer-major-version: 38
+          installer-major-version: ${{ env.IMAGE_MAJOR_VERSION }}
           boot-menu-path: boot_menu.yml
       - name: install github CLI
         run: |
