@@ -23,6 +23,8 @@ jobs:
           remove-dotnet: 'true'
           remove-android: 'true'
           remove-haskell: 'true'
+      - name: Add yq (for reading recipe.yml)
+        uses: mikefarah/yq@v4.35.1
       - name: Gather image data from recipe
         run: |
           echo "IMAGE_NAME=$(yq '.name' ./config/recipe.yml)" >> $GITHUB_ENV
