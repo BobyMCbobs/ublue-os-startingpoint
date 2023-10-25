@@ -49,6 +49,8 @@ modules:
       # - Krita: org.kde.krita
       - Firefox: org.mozilla.firefox
       - Slack: com.slack.Slack
+      - Sonic Pi: net.sonic_pi.SonicPi
+      - Scratch: edu.mit.Scratch
 
   - type: script
     scripts:
