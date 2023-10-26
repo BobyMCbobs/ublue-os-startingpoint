@@ -27,6 +27,10 @@ modules:
       - vim
       - gdisk
       - bootupd
+      - grub2
+      - ostree-grub2
+      - grub2-efi-x64
+      - efibootmgr
       # micro
       # - starship
     remove:
