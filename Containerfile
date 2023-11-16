@@ -48,4 +48,3 @@ RUN chmod +x /tmp/build.sh && /tmp/build.sh && \
 
 COPY config/files/usr/lib/bootc/install/00-u.toml /usr/lib/bootc/install/00-u.toml
 
-RUN rm -rf /var /run /tmp
