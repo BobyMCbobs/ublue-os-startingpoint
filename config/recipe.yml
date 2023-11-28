@@ -52,21 +52,21 @@ modules:
       # - dconf-update-service # a service unit that updates the dconf db on boot
       # - devpod # https://devpod.sh/ as an rpm
 
-
-  - type: yafti # if included, yafti and it's dependencies (pip & libadwaita)
-                #  will be installed and set up
-    custom-flatpaks: # this section is optional
-      # - Celluloid: io.github.celluloid_player.Celluloid
-      # - Krita: org.kde.krita
-      - Firefox: org.mozilla.firefox
-      - Slack: com.slack.Slack
-      - Sonic Pi: net.sonic_pi.SonicPi
-      - Scratch: edu.mit.Scratch
+  - type: default-flatpaks
+    system:
+      # If no repo information is specified, Flathub will be used by default
+      repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      repo-name: flathub
+      repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
+      install:
+        - org.mozilla.firefox
+        - com.slack.Slack
+        - net.sonic_pi.SonicPi
+        - edu.mit.Scratch
 
   - type: script
     scripts:
       # this sets up the proper policy & signing files for signed images to work
       - signing.sh
-  - type: script
-    scripts:
       - bootupctl-update-metadata.sh
+      - disable-yafti.sh
