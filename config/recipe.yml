@@ -36,6 +36,7 @@ modules:
       - efibootmgr
       - nc
       - cloud-utils
+      - strace
       # micro
       # - starship
     remove:
