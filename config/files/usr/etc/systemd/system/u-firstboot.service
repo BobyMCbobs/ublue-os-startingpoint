@@ -6,7 +6,7 @@ ConditionPathExists=!/var/lib/u-firstbooted
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/public-ipv4.sh
+ExecStart=/usr/lib/u-firstboot/install.sh
 ExecStartPost=/usr/bin/touch /var/lib/u-firstbooted
 RemainAfterExit=yes
 
