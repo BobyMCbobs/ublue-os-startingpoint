@@ -1,0 +1,14 @@
+[Unit]
+Before=systemd-user-sessions.service
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=!/var/lib/u-firstbooted
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/public-ipv4.sh
+ExecStartPost=/usr/bin/touch /var/lib/u-firstbooted
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
