@@ -5,6 +5,7 @@ After=network-online.target
 ConditionPathExists=!/var/lib/u-firstbooted
 
 [Service]
+User=root
 Type=oneshot
 ExecStart=/usr/lib/u-firstboot/install.sh
 ExecStartPost=/usr/bin/touch /var/lib/u-firstbooted
