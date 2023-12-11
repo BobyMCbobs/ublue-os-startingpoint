@@ -53,21 +53,10 @@ modules:
       # - dconf-update-service # a service unit that updates the dconf db on boot
       # - devpod # https://devpod.sh/ as an rpm
 
-  - type: default-flatpaks
-    system:
-      # If no repo information is specified, Flathub will be used by default
-      repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
-      repo-name: flathub
-      repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
-      install:
-        - org.mozilla.firefox
-        - com.slack.Slack
-        - net.sonic_pi.SonicPi
-        - edu.mit.Scratch
-
   - type: script
     scripts:
       # this sets up the proper policy & signing files for signed images to work
       - signing.sh
       - bootupctl-update-metadata.sh
       - add-ii-user.sh
+      - install-flatpaks.sh
