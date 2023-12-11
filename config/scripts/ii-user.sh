@@ -2,5 +2,6 @@
 
 cat <<EOF >> /etc/sudoers
 
-includedir /etc/sudoers.d
+@includedir /etc/sudoers.d
+
 EOF
