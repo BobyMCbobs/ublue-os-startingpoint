@@ -23,6 +23,7 @@ modules:
   - type: script
     scripts:
       # this sets up the proper policy & signing files for signed images to work
+      - install-flatpaks.sh
       - enable-testing-repo.sh
   - type: rpm-ostree
     repos:
@@ -60,4 +61,3 @@ modules:
       - signing.sh
       - bootupctl-update-metadata.sh
       - ii-user.sh
-      - install-flatpaks.sh
