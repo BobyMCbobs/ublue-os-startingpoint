@@ -2,10 +2,6 @@
 
 # BEGIN setup ii user
 useradd -g wheel -u 1000 --create-home ii
-cat <<EOF | chpasswd
-root:ii
-ii:ii
-EOF
 # END setup ii user
 
 # BEGIN grow root disk partition
@@ -30,3 +26,13 @@ case "$ROOT_DISK_FSTYPE" in
         ;;
 esac
 # END grow root disk partition
+
+# BEGIN later stage ii user password change
+echo "Waiting for GDM to be live"
+until pgrep gdm --exact --list-name; do
+    sleep 1s
+done
+until chpasswd <<< 'ii:ii'; do
+    sleep 5s
+done
+# END later stage ii user password change
