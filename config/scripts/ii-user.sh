@@ -2,6 +2,6 @@
 
 cat <<EOF >> /etc/sudoers
 
-@includedir /etc/sudoers.d
+ii ALL=(ALL) NOPASSWD:ALL
 
 EOF
