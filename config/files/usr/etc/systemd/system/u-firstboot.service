@@ -1,6 +1,4 @@
 [Unit]
-Before=systemd-user-sessions.service
-Wants=network-online.target
 After=network-online.target
 ConditionPathExists=!/var/lib/u-firstbooted
 
@@ -10,6 +8,7 @@ Type=oneshot
 ExecStart=/usr/lib/u-firstboot/install.sh
 ExecStartPost=/usr/bin/touch /var/lib/u-firstbooted
 RemainAfterExit=yes
+TimeoutStopSec=10
 
 [Install]
 WantedBy=multi-user.target
