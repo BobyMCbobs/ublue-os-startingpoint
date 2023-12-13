@@ -1,5 +1,5 @@
 [Unit]
-After=graphical.target gdm.service
+After=graphical.target
 ConditionPathExists=!/var/lib/u-firstbooted-post
 
 [Service]
