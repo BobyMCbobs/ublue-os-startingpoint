@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -o errexit
+set -o nounset
+set -o pipefail
+
 # BEGIN setup ii user
 useradd -g wheel -u 1000 --create-home ii
 # END setup ii user
@@ -27,3 +31,4 @@ case "$ROOT_DISK_FSTYPE" in
 esac
 # END grow root disk partition
 
+touch /var/lib/u-firstbooted
